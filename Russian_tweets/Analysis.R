@@ -33,5 +33,3 @@ Russian_tweets$Week
 ymd(Black_Lives_Matter$created_str)
 format.str <- "%a %b %d %H:%M:%S %z %Y"
 Russian_tweets$created_at <- as.POSIXct(strptime(Russian_tweets[,"created_str"], format.str, tz = "GMT"), tz = "GMT")
-
-mtcars[grep("^Merc",rownames(mtcars)),]

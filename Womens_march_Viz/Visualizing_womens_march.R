@@ -17,7 +17,7 @@ turnout_data <- third_party_gap %>%
 turnout_data <- turnout_data %>% 
   mutate(march_location = paste(CityTown, " ", StateTerritory, sep = ""))
 
-register_google(key = "AIzaSyA8PiqLPNxvr25Z0lPp0DCMRyiwNfn2rYY")
+register_google(key = "")
 
 for(i in 1:nrow(turnout_data)){
   result <- geocode(turnout_data$march_location[i], output = "latlona", source = "google")
