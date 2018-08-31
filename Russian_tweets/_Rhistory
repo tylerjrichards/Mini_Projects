@@ -1,0 +1,512 @@
+t_statistic = diff_mean / (s_pooled / sqrt(n))
+if(qt(c(.025, .975), df = 7)[2] > abs(t_statistic)){
+print("Do not reject Null Hypothesis")
+} else{
+print("Reject Null Hypothesis")
+}
+Paired_tensile = data.frame(Specimen = c(1:8), Machine_1 = c(74,76,74,69,58,71,66,65), Machine_2 = c(78, 79, 75, 66, 63, 70, 66, 67), Difference = c(-4,-3,-1,3,-5,1,0,-2))
+diff_mean = mean(Paired_tensile$Difference)
+sum_sq = sum(Paired_tensile$Difference^2)
+squared_sum = sum(Paired_tensile$Difference) ^ 2
+n = nrow(Paired_tensile)
+s_pooled = sqrt((sum_sq - (squared_sum / n)) / (n-1))
+t_statistic = diff_mean / (s_pooled / sqrt(n))
+if(qt(c(.025, .975), df = 7)[2] > abs(t_statistic)){
+print("Do not reject Null Hypothesis")
+} else{
+print("Reject Null Hypothesis")
+}
+Tensile_observations = data.frame(Hardwood_concentration = c(5,10,15,20), One = c(7,12,14,19), Two = c(8,17,18,25), Three = c(15,13,19,22), Four = c(11,18,17,23), Five = c(9,19,16,18), Six = c(10,15,18,20))
+Tensile_observations$Totals = rowSums(Tensile_observations[,c("One", "Two", "Three", "Four", "Five", "Six")])
+Tensile_observations$Averages = Tensile_observations$Totals / 6
+Sum_Squares_Total = sum(sum(Tensile_observations$One ^ 2), sum(Tensile_observations$Two ^ 2), sum(Tensile_observations$Three ^ 2), sum(Tensile_observations$Four ^ 2),sum(Tensile_observations$Five ^ 2), sum(Tensile_observations$Six ^ 2)) - (sum(Tensile_observations$Totals) ^ 2) / 24
+Sum_Squares_Treatment = (sum(Tensile_observations$Totals ^ 2) / 6) - (sum(Tensile_observations$Totals) ^ 2) / 24
+Sum_Squares_E = Sum_Squares_Total - Sum_Squares_Treatment
+Tensile_observations$Hardwood_concentration = as.factor(Tensile_observations$Hardwood_concentration)
+a = 4
+n = 6
+F_stat = (Sum_Squares_Treatment / (a-1) ) / (Sum_Squares_E / (a * ( n -1)))
+if(F_stat > qf(c(.01, .99), 3, 20)[2]){
+print("Reject Null Hypothesis")
+}
+Finance_data = data.frame(Observation = c(1:16), Applications = c(80, 93, 100, 82, 90, 99, 81, 96, 94, 93, 97, 95, 100, 85, 86, 87), Outstanding = c(8,9,10,12,11,8,8,10,12,11,13,11,8,12,9,12), Cost = c(2256,2340,2426,2293,2330,2368,2250,2409,2364,2379,2440,2364,2404,2317,2309,2328))
+Finance_data = data.frame(Observation = c(1:16), Applications = c(80, 93, 100, 82, 90, 99, 81, 96, 94, 93, 97, 95, 100, 85, 86, 87), Outstanding = c(8,9,10,12,11,8,8,10,12,11,13,11,8,12,9,12), Cost = c(2256,2340,2426,2293,2330,2368,2250,2409,2364,2379,2440,2364,2404,2317,2309,2328))
+Finance_model = lm(data = Finance_data, Cost ~ Outstanding + Applications)
+summary(Finance_model)
+Finance_data = data.frame(Observation = c(1:16), Applications = c(80, 93, 100, 82, 90, 99, 81, 96, 94, 93, 97, 95, 100, 85, 86, 87), Outstanding = c(8,9,10,12,11,8,8,10,12,11,13,11,8,12,9,12), Cost = c(2256,2340,2426,2293,2330,2368,2250,2409,2364,2379,2440,2364,2404,2317,2309,2328))
+Finance_model = lm(data = Finance_data, Cost ~ Outstanding + Applications)
+confint(Finance_model, "Applications")
+x = 5
+dice.roll = sample(1:6, size = 6)
+dice.roll
+if(6 %in% dice.roll){}
+if(6 %in% dice.roll){
+print("hey")
+}
+results = 0
+for(i in 1:1000){
+dice.roll = sample(1:6, size = 6)
+if(6 %in% dice.roll){
+results = results + 1
+}
+}
+results = 0
+for(i in 1:1000){
+dice.roll = sample(1:6, size = 6, replace = T)
+if(6 %in% dice.roll){
+results = results + 1
+}
+}
+results = 0
+for(i in 1:100000){
+dice.roll = sample(1:6, size = 6, replace = T)
+if(6 %in% dice.roll){
+results = results + 1
+}
+}
+print(results)
+results = 0
+for(i in 1:1000000){
+dice.roll = sample(1:6, size = 6, replace = T)
+if(6 %in% dice.roll){
+results = results + 1
+}
+}
+print(results)
+x=5
+x
+rm(ls = ls())
+rm(x)
+health_data = data.frame(Claim = c(1:40), Days = c(48,41,35,36,37,26,36,46,35,47, 35,34,36,42,43,36,56,32,46,30,37,43,17,26,28,27,45,33,22,27,16,22,33,30,24,23,22,30,31,17))
+stem(health_data$Days)
+set.seed(10)
+set.seed(10)
+rnorm(1:10)
+rnorm(1:10)
+rnorm(1:10)
+set.seed(10)
+rnorm(10)
+rnorm(10)
+set.seed(10); rnorm(10)
+set.seed(10); rnorm(10)
+install.packages(c("gutenbergr", "markovchain"))
+library(gutenbergr)
+library(tidyverse)
+library(markovchain)
+library(markovchain)
+shakespeare <- gutenberg_works(title == "Shakespeare's Sonnets") %>%
+pull(gutenberg_id) %>%
+gutenberg_download(verbose = F)
+`%not_in%` <- function(lhs, rhs) {
+!(lhs %in% rhs)
+}
+bills_words <- shakespeare %>%
+mutate(text = text %>%
+str_trim() %>%
+str_replace_all("--", " ") %>%
+str_replace_all("[^[:alnum:][:space:]']", "") %>%
+str_replace_all("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$",
+"") %>%
+str_to_lower()) %>%
+filter(text %not_in% c("the sonnets", "by william shakespeare", "", " ")) %>%
+pull(text) %>%
+str_split(" ") %>%
+unlist()
+punctuation <- shakespeare %>%
+pull(text) %>%
+str_extract_all("[^[:alnum:][:space:]']") %>%
+unlist()
+punctuation_probs <- punctuation[punctuation %not_in% c("-", "(", ")")] %>%
+table() %>%
+prop.table()
+sonnet_chain <- markovchainFit(bills_words)
+cat(markovchainSequence(n=10, markovchain = sonnet_chain$estimate),collapse = " ")
+write_a_line <- function(n_lines = 1) {
+walk(1:n_lines, function(.x) {
+# put together lines of more or less average length
+lines <- markovchainSequence(n = sample(c(6:9), 1),
+markovchain = sonnet_chain$estimate) %>%
+paste(collapse = " ")
+#  add end-of-line punctuation based on their occurence
+end_punctuation <- ifelse(.x == n_lines, ".",
+sample(names(punctuation_probs),
+size = 1,
+prob = punctuation_probs))
+cat(paste0(lines, end_punctuation, "  \n"))
+})
+}
+psuedosonnet <- function() {
+walk(1:3, function(.x) {
+write_a_line(4)
+cat("  \n")
+})
+write_a_line(2)
+}
+psuedosonnet()
+x = rbinom(1:100)
+psuedosonnet()
+psuedosonnet()
+psuedosonnet()
+null_hypothesis = 8.25
+sample_mean = 8.2535
+standard_dev = 0.002
+t_stat = (sample_mean - null_hypothesis) / (standard_dev / sqrt(15))
+Range_t <- qt(c(.025, .975), df = 14)
+if(Range_t[1] < t_stat & t_stat < Range_t[2]){
+print("Accept")
+} else{
+print("Reject")
+}
+?qt()
+qnorm(c(.025, .975))
+qt(c(.025, .975))
+qt(c(.025, .975), df = 14)
+pnorm(550, 600, 50)
+pnorm(550, 600, 50)
+library(gutenbergr)
+library(tidyverse)
+library(markovchain)
+shakespeare <- gutenberg_works(title == "Shakespeare's Sonnets") %>%
+pull(gutenberg_id) %>%
+gutenberg_download(verbose = F)
+`%not_in%` <- function(lhs, rhs) {
+!(lhs %in% rhs)
+}
+bills_words <- shakespeare %>%
+mutate(text = text %>%
+str_trim() %>%
+str_replace_all("--", " ") %>%
+str_replace_all("[^[:alnum:][:space:]']", "") %>%
+str_replace_all("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$",
+"") %>%
+str_to_lower()) %>%
+filter(text %not_in% c("the sonnets", "by william shakespeare", "", " ")) %>%
+pull(text) %>%
+str_split(" ") %>%
+unlist()
+punctuation <- shakespeare %>%
+pull(text) %>%
+str_extract_all("[^[:alnum:][:space:]']") %>%
+unlist()
+punctuation_probs <- punctuation[punctuation %not_in% c("-", "(", ")")] %>%
+table() %>%
+prop.table()
+sonnet_chain <- markovchainFit(bills_words)
+cat(markovchainSequence(n=10, markovchain = sonnet_chain$estimate),collapse = " ")
+write_a_line <- function(n_lines = 1) {
+walk(1:n_lines, function(.x) {
+# put together lines of more or less average length
+lines <- markovchainSequence(n = sample(c(6:9), 1),
+markovchain = sonnet_chain$estimate) %>%
+paste(collapse = " ")
+#  add end-of-line punctuation based on their occurence
+end_punctuation <- ifelse(.x == n_lines, ".",
+sample(names(punctuation_probs),
+size = 1,
+prob = punctuation_probs))
+cat(paste0(lines, end_punctuation, "  \n"))
+})
+}
+psuedosonnet <- function() {
+walk(1:3, function(.x) {
+write_a_line(4)
+cat("  \n")
+})
+write_a_line(2)
+}
+psuedosonnet()
+psuedosonnet()
+library(readr)
+Jeremy_AFC <- read_csv("~/Documents/Spring18/DS/Jeremy_AFC.csv",
+col_names = FALSE)
+View(Jeremy_AFC)
+?ts()
+ts(Jeremy_AFC)
+Jeremy_ts <- ts(Jeremy_AFC)
+acf(Jeremy_ts)
+acf(Jeremy_ts, 0)
+Auto_cor <- acf(Jeremy_ts, 0)
+library(readr)
+Jeremy_AFC <- read_csv("~/Documents/Spring18/DS/Jeremy_AFC.csv",
+col_names = FALSE)
+Jeremy_ts <- ts(Jeremy_AFC)
+Auto_cor <- acf(Jeremy_ts, 0, plot = F)
+Auto_cor
+Auto_cor$acf
+Auto_cor$acf[1]
+Auto_cor$acf[5]
+for(i in c(0:2000)){
+print(Auto_cor$acf[i])
+}
+install.packages("REdaS")
+library(REdaS)
+cart_distance <- function(point1_long, point1_lat, point2_long, point2_lat){
+require(REdaS)
+acos(cos(deg2rad(90 - point1_lat)) * cos(deg2rad(90 - point2_lat)) + sin(deg2rad(90 - point1_lat)) * sin(deg2rad(90 - point2_lat)) * cos(deg2rad(point2_long - point1_long))) * 3958.756
+}
+geo_points <- data.frame(long_geocoder1 = c(23, 25, 26), lat_geocoder1 = c(25,26,23), long_geocoder2 = c(24, 26, 25), lat_geocoder2 = c(23, 25, 24),
+actual_geo_long = c(23, 26.5, 25.2), actual_geo_lat = c(25.1, 26.2, 23.3))
+View(geo_points)
+library(tidyverse)
+cart_distance <- function(point1_long, point1_lat, point2_long, point2_lat){
+require(REdaS)
+return(acos(cos(deg2rad(90 - point1_lat)) * cos(deg2rad(90 - point2_lat)) + sin(deg2rad(90 - point1_lat)) * sin(deg2rad(90 - point2_lat)) * cos(deg2rad(point2_long - point1_long))) * 3958.756)
+}
+geo_points %>%
+mutate(Distance_mean = (cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) + cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat)) / 2)
+geo_points %>%
+mutate(Distance_mean = (cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) +
+cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat)) / 2) %>%
+mutate(Satisfactory = ifelse(Distance_mean < .5, TRUE, FALSE))
+geo_points %>%
+mutate(Distance_mean = (cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) +
+cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat)) / 2) %>%
+mutate(Distance_sd = sd(cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) +
+cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat)),
+Satisfactory = ifelse(Distance_mean < .5, TRUE, FALSE))
+geo_points %>%
+mutate(Distance_mean = mean(cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) +
+cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat))) %>%
+mutate(Distance_sd = sd(cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) +
+cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat)),
+Satisfactory = ifelse(Distance_mean < .5, TRUE, FALSE))
+geo_points <- geo_points %>%
+mutate(Distance_mean = (cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) +
+cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat)) / 2) %>%
+mutate(Distance_sd = sd(cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat) +
+cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat)),
+Satisfactory = ifelse(Distance_mean < .5, TRUE, FALSE))
+geo_points
+nm1 <- c('Distance_1', 'Distance_2')
+geo_points <- geo_points %>%
+mutate(Distance_1 = (cart_distance(long_geocoder1, lat_geocoder1, actual_geo_long, actual_geo_lat)),
+Distance_2 = (cart_distance(long_geocoder2, lat_geocoder2, actual_geo_long, actual_geo_lat))) %>%
+mutate(Distance_mean = rowMeans(.nm1), Distance_dev = rowSds(as.matrix(.[nm1])),
+Satisfactory = ifelse(Distance_mean < .5, TRUE, FALSE))
+library(gtools)
+raw_txt = "Dem.pct EV size State Rep.pct
+AK 40.50108 3 732 AK 55.49892
+AL 38.62712 9 405 AL 60.37288
+AR 40.56291 6 504 AR 59.43709
+AZ 46.89617 11 859 AZ 53.10383
+CA 61.49733 55 1005 CA 36.50267
+CT 61.98948 7 900 CT 38.01052
+DC 96.70255 3 501 DC 03.29745
+DE 64.25041 3 588 DE 35.74959
+FL 51.73604 29 738 FL 48.26396
+GA 46.59993 16 596 GA 52.40007
+HI 70.62515 4 761 HI 27.37485
+IA 52.72411 6 1008 IA 46.27589
+ID 39.34329 4 603 ID 60.65671
+IL 63.53229 20 225 IL 36.46771
+IN 49.95051 11 937 IN 50.04949
+KS 37.85524 6 819 KS 62.14476
+KY 39.42100 8 567 KY 60.57900
+LA 40.41514 8 541 LA 57.58486
+MA 64.06700 11 741 MA 35.93300
+MD 68.46216 10 257 MD 31.53784
+ME 60.95495 4 573 ME 39.04505
+MI 59.32956 16 152 MI 40.67044
+MN 56.39913 10 897 MN 43.60087
+MO 46.92633 10 906 MO 53.07367
+MS 48.60395 6 573 MS 51.39605
+MT 42.38009 3 728 MT 55.61991
+NC 48.08133 15 782 NC 49.91867
+ND 39.72801 3 514 ND 60.27199
+NE 32.55075 5 484 NE 67.44925
+NH 56.95381 4 932 NH 43.04619
+NJ 60.31767 14 388 NJ 39.68233
+NM 56.23601 5 282 NM 43.76399
+NV 50.96606 6 918 NV 49.03394
+NY 66.55607 29 955 NY 33.44393
+OH 51.46216 18 929 OH 47.53784
+OK 34.13442 7 708 OK 65.86558
+PA 52.38386 20 970 PA 45.61614
+RI 66.38853 4 411 RI 33.61147
+SC 49.62293 9 663 SC 50.37707
+SD 39.74359 3 546 SD 60.25641
+TN 46.22093 11 344 TN 53.77907
+TX 41.57170 38 918 TX 57.42830
+UT 43.70502 6 510 UT 56.29498
+VA 58.95710 13 642 VA 41.04290
+VT 73.74302 3 760 VT 26.25698
+WI 55.49687 10 436 WI 44.50313
+WV 36.40509 5 427 WV 62.59491
+WY 27.88871 3 503 WY 68.11129
+CO 52.02242 9 729 CO 46.97758
+OR 54.95128 7 437 OR 42.04872
+WA 56.7056 12 437 WA 42.2944";
+raw_data = textConnection(raw_txt)
+raw = read.table(raw_data, header=TRUE, comment.char="#", sep="")
+close.connection(raw_data)
+p.win = function(state){
+#Dirichlet distribution because there can be multiple candidates
+p=rdirichlet(1000000,
+raw$size[state]*c(raw$Rep.pct[state],raw$Dem.pct[state],(100-raw$Rep.pct[state]-raw$Dem.pct[state]))/100+1)
+mean(p[,2]>p[,1])
+}
+run.simulation=function(){
+## Binomial distribution because in all states except Nebraska and Maine it is winner takes all.
+## In NE and ME they use the Congressional District Method. But often all votes go to the same candidate.
+## During 2008 election was the first and last time NE split it's vote when Obama received 1 electoral vote.
+winner=rbinom(nrow(raw),1,probability.of.win)
+sum(raw$EV*winner)
+}
+p.win.state = sapply(1:nrow(raw),p.win)
+probability.of.win = p.win.state
+electoral.vote.simulation = replicate(500000,run.simulation())
+( sim.median = median(electoral.vote.simulation) ) #Calculate the median from the simulation
+hist(electoral.vote.simulation, nclass=1000, main='Simulation of Electoral Vote', xlab='Electoral Votes')
+credible.interval = quantile(electoral.vote.simulation, prob=c(.025, .975))
+abline(v=credible.interval, col=2)
+abline(v=sim.median, col=3, lwd=3)
+rm(list = ls())
+download.file("http://dl.ncsbe.gov/data/ncvoter_Statewide.zip", destfile = "C:/Desktop/NC_zip.zip")
+download.file("http://dl.ncsbe.gov/data/ncvoter_Statewide.zip", destfile = "C:/Users/Tyler/Desktop/NC_zip.zip")
+zipped_dest <- "C:/Users/Tyler/Desktop/NC_zip.zip"
+unzip(zipfile = zipped_dest, exdir = files_dest)
+files_dest <- "C:/Users/Tyler/Documents/Spring18/Research"
+unzip(zipfile = zipped_dest, exdir = files_dest)
+library(readr)
+North_Carolina_VR <- read.table("C:/Users/Tyler/Documents/Spring18/Research/ncvoter_Statewide.txt", header = T)
+hist.ggplot <- ggplot(mtcars, aes(x=mpg)) + geom_histogram(binwidth=1)
+library(ggplot2)
+library(ggplot2)
+hist.ggplot <- ggplot(mtcars, aes(x=mpg)) + geom_histogram(binwidth=1)
+hist.ggplot
+scatter.ggplot <- ggplot(mtcars, aes(x=wt, y=mpg, colour=cyl)) + geom_point()
+scatter.ggplot
+mpg
+summary(mpg)
+str(mpg)
+ggplot(mpg, aes(city ,hwy)) + ggpoint()
+ggplot(mpg, aes(city ,hwy)) + geom_point()
+ggplot(mpg, aes(cty ,hwy)) + geom_point()
+ggplot(mpg, aes(cty ,hwy)) + geom_point() + geom_smooth(method = "lm")
+ggplot(mpg, aes(cty ,hwy)) + geom_point() + geom_smooth(method = "lm") + labs(y = "hwy", x = "city", title = "Scatterplot of City vs Highway mpg")
+ggplot(mpg, aes(cty ,hwy)) + geom_point() + geom_smooth(method = "lm") + labs(y = "hwy", x = "city", title = "Scatterplot of City vs Highway mpg", caption = "Source: midwest")
+install.packages("AER")
+library(AER)
+Affairs
+data("Affairs")
+str(Affairs)
+hist.ggplot <- ggplot(Affairs, aes(x=affairs)) + geom_histogram(binwidth=1)
+hist.ggplot <- ggplot(Affairs, aes(x=affairs)) + geom_histogram(binwidth=1)
+hist.ggplot
+ggplot(Affairs, aes(affairs ,children)) + geom_point()
+ggplot(Affairs, aes(affairs ,yearsmarried)) + geom_point()
+ggplot(Affairs, aes(affairs ,yearsmarried)) + geom_bar()
+ggplot(Affairs, aes(affairs ,yearsmarried)) + geom_point()
+ggplot(Affairs, aes(yearsmarried, affairs)) + geom_point()
+ggplot(Affairs, aes(religiousness, affairs)) + geom_point()
+ggplot(Affairs, aes(religiousness, affairs)) + geom_boxplot()
+ggplot(Affairs, aes(religiousness, affairs)) + geom_boxplot(aes(group = cut_width(religiousness, 1)))
+rm(list = ls())
+x = 5
+x <- 6
+y <- "six"
+y
+x
+3 * 6
+3 * "six"
+class(x)
+class(y)
+z <- "6"
+class(z)
+as.numeric(z)
+z <- "6"
+x * z
+class(z)
+as.numeric(z)
+z <- as.numeric(z)
+x * z
+as.numeric(y)
+as.character(x)
+as.integer(3.7)
+as.integer(3.2)
+round(3.7)
+?round
+round(3.7, 2)
+as.integer(3.2)
+round(3.7)
+?round
+round(3.7, 2)
+x = 5
+x = 6
+x = "and"
+c(1,2,3,4,5)
+heat_setting <- factor(c("Low", "Medium", "High"))
+heat_setting
+heat_setting <- factor(c("Low", "Medium", "High", "Low", "High"))
+heat_setting
+heat_setting <- factor(c("Low", "Medium", "High", "Low", "High", "alpha", "beta"))
+heat_setting
+a = TRUE
+class(a)
+d = c(TRUE, FALSE, TRUE)
+d = c(TRUE, 1, "Andrew")
+d
+as.logical(d)
+d
+class(d)
+as.logical(as.integer(d))
+data_vector <- c(1,2,3,4,5, 23, 56)
+data_vector[6]
+data_vector[7]
+data_vector[-1]
+data_vector[-5]
+1:3
+data_vector[1:3]
+data_vector[c(1,3,5,7)]
+seq(1, 99, 2)
+seq(1, 7, 2)
+data_vector[seq(1,7,2)]
+studentID <- c(1,2,3,4)
+age <- c(25,19,22,21)
+university <- c("UF", "FSU", "UF", "UCF")
+hired <- c(TRUE, FALSE, TRUE, FALSE)
+studentdata <- data.frame(studentID, age, university, hired)
+studentdata
+studentdata[1,3]
+studentdata[3,1]
+class(studentdata$university)
+studentdata$university <- as.character(studentdata$university)
+class(studentdata$university)
+mtcars
+summary(mtcars)
+str(mtcars)
+head(mtcars)
+library(readr)
+epl1617 <- read_csv("~/Documents/Spring18/DS/DSI_Workshops/epl1617.csv")
+View(epl1617)
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg)) + geom_histogram(binwidth = 1)
+ggplot(mtcars, aes(x = mpg))
+ggplot(mtcars, aes(x = mpg)) + geom_histogram(binwidth = 1)
+?ggplot
+ggplot(mtcars, aes(x = wt, y = mpg, colour = cyl)) + geom_point()
+mpg
+summary(mpg)
+ggplot(mpg, aes(cty, hwy)) + geom_point()
+ggplot(mtcars, aes(wt, mpg, cyl)) + geom_point()
+?aes
+ggplot(mpg, aes(cty, hwy)) + geom_point() + geom_smooth(method = "lm")
+?lm
+lm(data = mpg, formula = cty ~ hwy)
+install.packages("AER")
+install.packages("AER")
+library(AER)
+data("Affairs")
+View(Affairs)
+ggplot(Affairs, aes(x = affairs)) + geom_histogram(binwidth = 1)
+library(readr)
+library(tidyverse)
+library(wordcloud)
+library(data.table)
+Russian_tweets <- read_csv("tweets.csv")
+setwd("~/Documents/Spring18/DS/Russian_tweets")
+Russian_tweets <- read_csv("tweets.csv")
+nrow(Russian_tweets[Russian_tweets$hashtags == "[]",]
+)
+11496/203482
+114696/203482
