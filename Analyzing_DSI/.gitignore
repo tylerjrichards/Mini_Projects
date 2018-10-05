@@ -1,1 +1,2 @@
-workshops.csv
+*.csv
+.httr-oauth
