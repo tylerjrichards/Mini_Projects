@@ -24,4 +24,6 @@ for(i in 1:length(my_sheets$sheet_title)){
   }
 }
 
+write.csv(x = combined_sheet, "Fall_Workshops.csv")
+
 
