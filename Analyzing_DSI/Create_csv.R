@@ -36,3 +36,4 @@ All_workshops <- read.csv("workshops.csv") %>% clean_names() %>% select(-('x'))
 colnames(Combined_workshop)
 Combined_workshop <- bind_rows(Fall_workshops, All_workshops) %>% select(-c("r_workshop_attendance", "python_attendance", "no_punc", "polarity"))
 
+write.csv(Combined_workshop, "Full_DSI_History.csv", row.names = F)
