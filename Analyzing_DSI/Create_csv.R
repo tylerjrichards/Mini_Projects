@@ -1,7 +1,9 @@
+#pulling csv
 library(googlesheets)
 library(dplyr)
 my_sheets = gs_ls()
 
+#filtering
 my_sheets = my_sheets %>% 
   filter(as.Date(updated) > as.Date("2018-09-15")) %>% 
   filter(grepl("Fall 2018", sheet_title)) %>% 
@@ -26,4 +28,11 @@ for(i in 1:length(my_sheets$sheet_title)){
 
 write.csv(x = combined_sheet, "Fall_Workshops.csv", row.names = F)
 
+#combine csvs
+
+library(janitor)
+Fall_workshops <- read.csv("Fall_Workshops.csv") %>% clean_names() %>% rename("email" = "email_address")
+All_workshops <- read.csv("workshops.csv") %>% clean_names() %>% select(-('x'))
+colnames(Combined_workshop)
+Combined_workshop <- bind_rows(Fall_workshops, All_workshops) %>% select(-c("r_workshop_attendance", "python_attendance", "no_punc", "polarity"))
 
