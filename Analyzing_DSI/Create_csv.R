@@ -27,7 +27,7 @@ for(i in 1:length(my_sheets$sheet_title)){
 }
 
 write.csv(x = combined_sheet, "Fall_Workshops.csv", row.names = F)
-
+DataExplorer::create_report(Fall_workshops)
 #combine csvs
 
 library(janitor)
@@ -37,3 +37,14 @@ colnames(Combined_workshop)
 Combined_workshop <- bind_rows(Fall_workshops, All_workshops) %>% select(-c("r_workshop_attendance", "python_attendance", "no_punc", "polarity"))
 
 write.csv(Combined_workshop, "Full_DSI_History.csv", row.names = F)
+
+
+
+
+
+
+
+
+
+
+
