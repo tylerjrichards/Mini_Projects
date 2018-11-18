@@ -1,0 +1,3 @@
+“Analytic Frameworks for Student Organizations: Exploring 3 Years of Data at DSI”
+
+DSI is a Data Science Organization hyper focused on teaching and growing a data science community at UF. For the past three years, it has been hosting workshops on everything from machine learning in R or Python to Natural Language Processing. Over the course of the past semester, DSI has generated analytic capabilities focused on the over two thousand workshop attendences for visualization and predictive purposes to increase the organization’s effectiveness. This talk will cover both the analytic insights (workshop creation, timing, etc) from the data and also the learnings from practical applications of data science.
