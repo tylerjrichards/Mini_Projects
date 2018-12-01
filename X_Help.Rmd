@@ -1,0 +1,43 @@
+---
+title: Xavier Help
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
+Hey Xavier, I thought this was a bit easier than email. This is made using what is called an rmd file, which let's me write code and also comment.  
+
+
+What you're first trying to do is create a dataframe with the data you have already written down. This is how we create a dataframe in R but if we were trying to store something like names and favorite drinks.  
+
+```{r}
+x <- data.frame("names" = c("Tyler", "Trey", "Xavier"), "favorite_drink" = c("Gin and Tonic", "Some bullshit", "Juul flavored vodka"))
+
+```
+
+Now let's look at the dataframe we made
+
+```{r}
+print(x)
+```
+
+So for you, you need to start by making the dataframe from your spreadsheet, but you want to make sure to format it correctly. A good rule of thumb is that each row should only have one subject (in the previous case, each row was about a different person), and each cell should have one value in it. Yours might look something like this. 
+
+```{r}
+Xavier_Dataframe <- data.frame("Rock" = c("C", "C", "C", "A", "A", "A"), "count" = c(17,17,16,23,23,20), "counting_number" = c(1,2,3,1,2,3))
+```
+
+You would continue this through F and H. Let's look at our dataframe now. 
+
+```{r}
+print(Xavier_Dataframe)
+```
+
+Now using this you can start answering the questions. You can use the plot function, which takes an x and y and guesses what graph you want, to approach the variance question. 
+
+```{r}
+plot(Xavier_Dataframe$Rock, Xavier_Dataframe$count)
+```
+
+I hope this helps you out! Let me know if I can help more. 
